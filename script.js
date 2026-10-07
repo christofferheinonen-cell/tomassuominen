@@ -183,13 +183,22 @@
 
     const paintStack = () => {
       stackFrame = 0;
-      if (!stackMq.matches || reduceMotion) return;
+      if (!stackMq.matches) return;
       stackItems.forEach((card, i) => {
         const next = stackItems[i + 1];
         if (!next) return;
         const r = card.getBoundingClientRect();
+        const overlap = r.bottom - next.getBoundingClientRect().top;
+        // Cards differ in height, so a taller card would stick out below a shorter one in front of
+        // it. Clip each card a little below the next card's top edge; the clipped part is behind
+        // that card anyway. (In the card's own pixels: the rect is scaled, the clip is not.)
+        const cut = (overlap - 32) * (card.offsetHeight / r.height);
+        card.style.clipPath = cut > 0 ? `inset(0 0 ${cut.toFixed(1)}px 0)` : '';
+        // A covered card drops its shadow: the clip would cut it into a hard-edged band.
+        card.style.boxShadow = cut > 0 ? 'none' : '';
+        if (reduceMotion) return;
         // How far the next card has slid over this one, 0…1.
-        const p = Math.min(1, Math.max(0, (r.bottom - next.getBoundingClientRect().top) / r.height));
+        const p = Math.min(1, Math.max(0, overlap / r.height));
         card.style.setProperty('--stack-scale', (1 - p * 0.06).toFixed(3));
         card.style.setProperty('--stack-dim', (1 - p * 0.14).toFixed(3));
       });
@@ -199,6 +208,8 @@
         ['--stick', '--stack-scale', '--stack-dim'].forEach((v) => card.style.removeProperty(v));
         card.style.marginTop = '';
         card.style.marginBottom = '';
+        card.style.clipPath = '';
+        card.style.boxShadow = '';
       });
       if (!stackMq.matches) return;
 
