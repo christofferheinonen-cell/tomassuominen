@@ -1,4 +1,4 @@
-// Builds one landing page per city in tools/cities.mjs, e.g. helsinki/index.html.
+// Builds one landing page per city in tools/cities.mjs, e.g. juontaja-helsinki/index.html.
 //
 //   node tools/build-cities.mjs
 //

@@ -4,7 +4,7 @@ Static site: `index.html`, `styles.css`, `script.js`, `assets/`. No build step f
 
 ## City landing pages
 
-City pages (e.g. `helsinki/index.html`) are generated. Don't edit them by hand.
+City pages (e.g. `juontaja-helsinki/index.html`) are generated. Don't edit them by hand.
 
 1. Add or edit a city in `tools/cities.mjs`.
 2. Run `node tools/build-cities.mjs`.

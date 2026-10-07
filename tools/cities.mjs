@@ -9,7 +9,7 @@ export const SITE = 'https://www.tomassuominen.fi';
 
 export const cities = [
   {
-    slug: 'helsinki',
+    slug: 'juontaja-helsinki',   // URL: /juontaja-helsinki/
     name: 'Helsinki',
     inessive: 'Helsingissä',      // "in Helsinki"
     illative: 'Helsinkiin',       // "to Helsinki"
