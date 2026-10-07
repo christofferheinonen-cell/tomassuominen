@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tomas Suominen – Juontaja, keynote-puhuja ja VIP-isäntä</title>
+  <meta name="description" content="Inspiroivat puhujakeikat, ammattimaiset juonnot ja VIP-tilaisuuksien isännöinti – Helsingissä, Tampereella, Turussa, Oulussa ja koko Suomessa.">
+  <meta property="og:title" content="Tomas Suominen – Juontaja ja keynote-puhuja">
+  <meta property="og:description" content="Juonnot, puhujakeikat, VIP Hosting ja ääninäyttely koko Suomessa.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#2B0A15">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800;900&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#sisalto">Siirry sisältöön</a>
+
+  <header class="nav" data-nav>
+    <a class="nav__brand" href="#top" aria-label="Tomas Suominen, etusivulle">Tomas Suominen</a>
+    <nav aria-label="Päävalikko">
+      <ul class="nav__links">
+        <li><a href="#palvelut">Palvelut</a></li>
+        <li><a href="#prosessi">Prosessi</a></li>
+        <li><a href="#ukk">UKK</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--light btn--sm" href="#varaa">Varaa keikka</a>
+  </header>
+
+  <!-- Hero: a dark stage. The name sits in a spotlight that follows the pointer. -->
+  <section class="stage" id="top" data-stage>
+    <div class="stage__light" aria-hidden="true"></div>
+    <div class="stage__floor" aria-hidden="true"></div>
+
+    <div class="stage__inner">
+      <p class="eyebrow eyebrow--stage">Juontaja · Keynote-puhuja · VIP-isäntä · Ääni</p>
+
+      <h1 class="marquee">
+        <span class="marquee__base">Tomas<br>Suominen</span>
+        <span class="marquee__lit" aria-hidden="true">Tomas<br>Suominen</span>
+      </h1>
+
+      <figure class="portrait">
+        <!-- Replace assets/tomas.jpg with the portrait from the current site (square, at least 600×600). -->
+        <img src="assets/tomas.jpg" alt="Tomas Suominen" width="600" height="600" onerror="this.closest('.portrait').classList.add('portrait--empty')">
+        <span class="portrait__fallback" aria-hidden="true">TS</span>
+      </figure>
+
+      <p class="stage__lede">
+        Inspiroivat puhujakeikat, ammattimaiset juonnot ja VIP-tilaisuuksien isännöinti –
+        Helsingissä, Tampereella, Turussa, Oulussa ja koko Suomessa.
+      </p>
+
+      <div class="stage__actions">
+        <a class="btn btn--light" href="#varaa">Varaa keikka</a>
+        <a class="btn btn--ghost" href="#palvelut">Tutustu palveluihin</a>
+      </div>
+    </div>
+  </section>
+
+  <main id="sisalto">
+    <!-- Introduction -->
+    <section class="intro">
+      <div class="wrap">
+        <p class="intro__text">
+          <strong>Tomas Suominen</strong> on tapahtumien juontaja ja keynote-puhuja, joka tunnetaan suorasta ilmaisusta,
+          lavakarismasta ja kyvystä pitää yleisö mukana alusta loppuun. Hän isännöi yritystapahtumia, VIP-tilaisuuksia,
+          gaaloja ja seminaareja ympäri Suomen.
+        </p>
+        <p class="intro__kicker">Tomaksen karismaattinen ääni ei jätä yleisöä kylmäksi. <em>Se on taattua.</em></p>
+      </div>
+    </section>
+
+    <!-- Services: not a sequence, so no numbering. Each row's button preselects the service in the form. -->
+    <section class="services" id="palvelut" aria-labelledby="palvelut-otsikko">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Palvelut</p>
+          <h2 id="palvelut-otsikko" class="section-title">Lavalla, mikrofonissa ja kameran edessä</h2>
+        </header>
+
+        <ul class="svc-list">
+          <li class="svc">
+            <h3 class="svc__name">Juonnot</h3>
+            <div class="svc__body">
+              <p>Tomas juontaa yritystapahtumat, gaalat ja seminaarit niin, että aikataulu pitää ja tunnelma nousee. Hän lukee salia, reagoi hetkeen ja pitää langat käsissään koko tilaisuuden ajan – ammattimaisesti eri Suomen kaupungeissa.</p>
+              <p class="svc__cities"><span>Suositut juontokaupungit</span>Helsinki, Tampere, Turku, Oulu, Espoo, Vantaa, Lahti, Jyväskylä, Kuopio, Vaasa</p>
+            </div>
+            <a class="svc__cta" href="#varaa" data-service="Juonto">Varaa juontaja <span aria-hidden="true">→</span></a>
+          </li>
+
+          <li class="svc">
+            <h3 class="svc__name">Puhujakeikat</h3>
+            <div class="svc__body">
+              <p>Tomaksen puheenvuorot ovat inspiroivia, yhteisöllisiä ja käytännönläheisiä. Sopii yrityksille, oppilaitoksille ja tapahtumiin, joissa halutaan herättää ajattelua ja saada ihmiset liikkeelle.</p>
+              <p class="svc__cities"><span>Teemoja</span>Rohkeus, yhteisöllisyys, itsensä ylittäminen</p>
+              <p class="svc__cities"><span>Suositut puhujakaupungit</span>Helsinki, Tampere, Turku, Oulu, Pori, Seinäjoki, Joensuu, Hämeenlinna, Lappeenranta</p>
+            </div>
+            <a class="svc__cta" href="#varaa" data-service="Puheenvuoro">Varaa puhuja <span aria-hidden="true">→</span></a>
+          </li>
+
+          <li class="svc">
+            <h3 class="svc__name">VIP Hosting</h3>
+            <div class="svc__body">
+              <p>Kun yleisö tai vieraslista on A-luokkaa, myös isännöinnin pitää olla. Tomas hoitaa VIP-tilaisuudet tyylillä ja tilannetajulla, joka saa ihmiset tuntemaan olonsa tervetulleiksi ilman päällekäyvää show’ta. VIP Hosting toimii gaaloissa, yrityksen juhlatilaisuuksissa ja premium-asiakastapahtumissa.</p>
+              <p class="svc__cities"><span>Suositut VIP-keikkakaupungit</span>Helsinki, Espoo, Tampere, Turku, Oulu, Vaasa</p>
+            </div>
+            <a class="svc__cta" href="#varaa" data-service="VIP Hosting">Varaa VIP-isäntä <span aria-hidden="true">→</span></a>
+          </li>
+
+          <li class="svc">
+            <h3 class="svc__name">Ääninäyttely</h3>
+            <div class="svc__body">
+              <p>Korkealaatuista äänityötä mainoksiin, videoihin, animaatioihin, yritysten sisäiseen koulutukseen ja muihin mediatuotantoihin. Selkeä artikulointi, monipuolinen äänenkäyttö ja vahva läsnäolo tuovat sävyä tuotantoon ja tekevät brändistä kuuluvan.</p>
+            </div>
+            <a class="svc__cta" href="#varaa" data-service="Ääninäyttely">Tilaa äänityö <span aria-hidden="true">→</span></a>
+          </li>
+
+          <li class="svc">
+            <h3 class="svc__name">Muut</h3>
+            <div class="svc__body">
+              <p>Kaikki, mikä ei mene siistiin lokeroon: some-sisällöt, tuotelanseeraukset, brändi-hostaus ja konseptien elävöittäminen lavalla ja kameran edessä.</p>
+            </div>
+            <a class="svc__cta" href="#varaa" data-service="Muu">Kerro ideasi <span aria-hidden="true">→</span></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Process: a real sequence, so the steps are numbered. -->
+    <section class="process" id="prosessi" aria-labelledby="prosessi-otsikko">
+      <div class="wrap">
+        <header class="section-head section-head--dark">
+          <p class="eyebrow eyebrow--stage">Prosessi</p>
+          <h2 id="prosessi-otsikko" class="section-title">Näin syntyy tapahtuma, joka toimii</h2>
+          <p class="section-sub">Tomaksen keikkaprosessi on suoraviivainen ja toistettavissa joka kerta. Neljä vaihetta, yksi tavoite: yleisö mukana ja viesti perillä.</p>
+        </header>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__no">1/4</span>
+            <h3 class="step__title">Ydin kirkkaaksi</h3>
+            <ul>
+              <li>Tapahtuman tavoitteen ja yleisön määrittely</li>
+              <li>Roolin sopiminen: juonto, puheenvuoro tai VIP-isännöinti</li>
+              <li>Raamit ja tärkeimmät lavan hetket</li>
+            </ul>
+          </li>
+          <li class="step">
+            <span class="step__no">2/4</span>
+            <h3 class="step__title">Flow kartalle</h3>
+            <ul>
+              <li>Tapahtuman kulun rakentaminen</li>
+              <li>Puheteeman, äänensävyn ja energiatason sopiminen</li>
+              <li>Tarvittavien tietojen kerääminen asiakkaalta</li>
+            </ul>
+          </li>
+          <li class="step">
+            <span class="step__no">3/4</span>
+            <h3 class="step__title">Lavalla</h3>
+            <ul>
+              <li>Juonto tai puheenvuoro sovitun rungon mukaan</li>
+              <li>Salin energiaan reagoiminen hetkessä</li>
+              <li>Saumaton yhteistyö tekniikan ja tuotannon kanssa</li>
+            </ul>
+          </li>
+          <li class="step">
+            <span class="step__no">4/4</span>
+            <h3 class="step__title">Jälkipuinti</h3>
+            <ul>
+              <li>Lyhyt palaute asiakkaan kanssa</li>
+              <li>Mikä toimi ja mitä viedään seuraavaan kertaan</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="ukk" aria-labelledby="ukk-otsikko">
+      <div class="wrap wrap--narrow">
+        <header class="section-head">
+          <p class="eyebrow">UKK</p>
+          <h2 id="ukk-otsikko" class="section-title">Usein kysyttyä</h2>
+        </header>
+
+        <details class="qa">
+          <summary>Miten voin varata Tomaksen juontajaksi tai puhujaksi tapahtumaani?</summary>
+          <p>Täytä sivun lopussa oleva lomake ja kerro, mitä, missä ja milloin. Tomas vastaa ja ehdottaa tapahtumaasi sopivaa kokonaisuutta. Mitä aiemmin olet yhteydessä, sitä varmemmin päivä on vielä vapaana.</p>
+        </details>
+        <details class="qa">
+          <summary>Millaisiin tapahtumiin Tomas sopii parhaiten?</summary>
+          <p>Yritystapahtumiin, gaaloihin, seminaareihin, asiakastilaisuuksiin ja oppilaitosten tapahtumiin – kaikkialle, missä yleisö halutaan pitää mukana alusta loppuun.</p>
+        </details>
+        <details class="qa">
+          <summary>Mitä VIP Hosting tarkoittaa käytännössä?</summary>
+          <p>Tomas toimii illan isäntänä: hän vastaanottaa vieraat, esittelee puhujat ja ohjelman, pitää tunnelman yllä ja huolehtii, että jokainen vieras tuntee olonsa tervetulleeksi.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Booking -->
+    <section class="booking" id="varaa" aria-labelledby="varaa-otsikko">
+      <div class="wrap booking__grid">
+        <header class="booking__head">
+          <p class="eyebrow eyebrow--stage">Varaa keikka</p>
+          <h2 id="varaa-otsikko" class="booking__title">Varaa Tomas tapahtumaasi</h2>
+          <p class="section-sub">Kerro lyhyesti tapahtumastasi. Tomas vastaa ja ehdottaa sopivaa kokonaisuutta.</p>
+        </header>
+
+        <!-- Set data-endpoint to the form backend (e.g. a Formspree URL) before going live. -->
+        <form class="form" data-booking-form data-endpoint="" novalidate>
+          <div class="field">
+            <label for="f-name">Nimi</label>
+            <input id="f-name" name="nimi" type="text" autocomplete="name" placeholder="Etunimi Sukunimi" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Sähköpostiosoite</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="nimi@yritys.fi" required>
+          </div>
+          <div class="field">
+            <label for="f-company">Yritys</label>
+            <input id="f-company" name="yritys" type="text" autocomplete="organization" placeholder="Yritys Oy">
+          </div>
+          <div class="field">
+            <label for="f-service">Mitä tarvitset?</label>
+            <select id="f-service" name="palvelu">
+              <option value="">Valitse palvelu</option>
+              <option>Juonto</option>
+              <option>Puheenvuoro</option>
+              <option>VIP Hosting</option>
+              <option>Ääninäyttely</option>
+              <option>Muu</option>
+            </select>
+          </div>
+          <div class="field field--wide">
+            <label for="f-msg">Kerro tapahtumasta</label>
+            <textarea id="f-msg" name="viesti" rows="5" placeholder="Mitä, missä, milloin, kuinka suurelle yleisölle?" required></textarea>
+          </div>
+          <div class="form__foot field--wide">
+            <button class="btn btn--light" type="submit">Lähetä tiedustelu</button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p class="footer__name">Tomas Suominen</p>
+      <ul class="footer__links">
+        <!-- Replace # with the real profile URLs and email address. -->
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Sähköposti</a></li>
+      </ul>
+      <p class="footer__meta">© <span data-year>2026</span> Tomas Suominen · Design: Christoffer Heinonen</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
