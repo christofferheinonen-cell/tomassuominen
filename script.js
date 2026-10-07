@@ -195,15 +195,29 @@
       });
     };
     const layoutStack = () => {
-      if (!stackMq.matches) {
-        stackItems.forEach((card) => ['--stick', '--stack-scale', '--stack-dim'].forEach((v) => card.style.removeProperty(v)));
-        return;
-      }
-      const navH = navEl ? navEl.offsetHeight : 0;
-      stackItems.forEach((card, i) => {
-        const top = Math.min(navH + 12 + i * 10, window.innerHeight - card.offsetHeight - 12);
-        card.style.setProperty('--stick', `${Math.round(top)}px`);
+      stackItems.forEach((card) => {
+        ['--stick', '--stack-scale', '--stack-dim'].forEach((v) => card.style.removeProperty(v));
+        card.style.marginTop = '';
+        card.style.marginBottom = '';
       });
+      if (!stackMq.matches) return;
+
+      const navH = navEl ? navEl.offsetHeight : 0;
+      const heights = stackItems.map((card) => card.offsetHeight);
+      const tops = heights.map((h, i) => Math.round(Math.min(navH + 12 + i * 10, window.innerHeight - h - 12)));
+      tops.forEach((top, i) => stackItems[i].style.setProperty('--stick', `${top}px`));
+
+      // A sticky card lets go when the end of the list reaches its bottom margin edge. Cards differ
+      // in height and offset, so each would let go at a different moment. A bottom margin per card
+      // gives all of them the release point of the last card, so the stack leaves together; the
+      // next card's negative top margin cancels it, so the visible spacing stays the same.
+      const last = stackItems.length - 1;
+      const release = tops[last] + heights[last];
+      for (let i = 0; i < last; i++) {
+        const extra = release - (tops[i] + heights[i]);
+        stackItems[i].style.marginBottom = `${extra}px`;
+        stackItems[i + 1].style.marginTop = `${-extra}px`;
+      }
       paintStack();
     };
 
