@@ -185,6 +185,10 @@ function renderCity(c) {
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#2B0A15">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
   <link rel="stylesheet" href="../styles.css">
   <script type="application/ld+json">
 ${JSON.stringify(jsonLd, null, 2).replace(/</g, '\\u003c')}
@@ -317,6 +321,10 @@ function renderLegal(pg) {
   <meta property="og:url" content="${url}">
   <meta property="og:locale" content="fi_FI">
   <meta name="theme-color" content="#2B0A15">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="manifest" href="../site.webmanifest">
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="page-legal">

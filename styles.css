@@ -216,9 +216,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .nav.is-scrolled { background: rgba(43, 10, 21, .92); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--velvet-line); }
 .nav__brand {
+  display: inline-flex; align-items: center; gap: 12px;
   font: 800 1.25rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .04em;
   text-decoration: none; margin-right: auto;
 }
+/* TS mark: the hero's Big Shoulders Display 900, converted to outlines (assets/brand/) */
+.nav__mark { height: 30px; width: auto; flex: none; }
+.nav__name { padding-left: 12px; border-left: 1px solid var(--velvet-line); line-height: 30px; white-space: nowrap; }
+.nav .btn { white-space: nowrap; }
 .nav__links { display: flex; gap: 28px; }
 .nav__links a { text-decoration: none; font-size: .9rem; color: var(--rose); transition: color .2s; }
 .nav__links a:hover { color: var(--limelight); }
@@ -814,6 +819,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 @media (max-width: 640px) {
   .nav__links { display: none; }
+  .nav__name { display: none; }   /* phones: the TS mark only; the full name is in the hero below */
   .steps { grid-template-columns: 1fr; border-top: 0; }
   .step, .step + .step { padding: 28px 0 8px 24px; border-left: 1px solid var(--velvet-line); margin-top: 0; border-top: 0; }
   .step::before, .step + .step::before, .step:nth-child(3)::before { left: -5px; top: 34px; }
