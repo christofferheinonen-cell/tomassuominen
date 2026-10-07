@@ -282,7 +282,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .svc-list { border-top: 1px solid var(--line); }
 .svc {
   position: relative; isolation: isolate;
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr) auto;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr) 10.5rem;
   gap: clamp(20px, 4vw, 56px); align-items: start;
   padding: clamp(32px, 4vw, 48px) 0;
   border-bottom: 1px solid var(--line);
@@ -292,21 +292,26 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   background: linear-gradient(90deg, var(--gaffer-2), transparent 70%);
   opacity: 0; transition: opacity .35s var(--ease);
 }
-.svc:hover::before { opacity: 1; }
+@media (hover: hover) { .svc:hover::before { opacity: 1; } }
 .svc__name {
   font: 800 clamp(2.5rem, 5.5vw, 4.25rem)/.9 var(--f-display);
   text-transform: uppercase; letter-spacing: .005em;
   transition: transform .4s var(--ease);
 }
-.svc:hover .svc__name { transform: translateX(6px); }
+@media (hover: hover) { .svc:hover .svc__name { transform: translateX(6px); } }
 .svc__body { display: grid; gap: 16px; color: var(--ink-soft); max-width: 58ch; }
-.svc__cities { font-size: .95rem; color: var(--ink); }
-.svc__cities span {
-  display: block; margin-bottom: 4px;
+.svc__label {
+  margin-bottom: 8px;
   font: 500 .7rem/1.2 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--brass);
 }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li {
+  padding: 4px 10px; border-radius: 999px;
+  background: var(--gaffer-2); color: var(--ink);
+  font-size: .85rem; font-weight: 500; line-height: 1.4;
+}
 .svc__cta {
-  align-self: start; white-space: nowrap;
+  align-self: start; justify-self: end; white-space: nowrap;
   display: inline-flex; align-items: center; gap: .4em; min-height: 44px;
   font-weight: 600; font-size: .95rem; text-decoration: none;
   border-bottom: 1px solid currentColor;
@@ -505,7 +510,22 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 960px) {
-  .svc { grid-template-columns: 1fr; gap: 16px; }
+  /* services become cards once they stack into one column */
+  .svc-list { border-top: 0; display: grid; gap: 14px; }
+  .svc {
+    grid-template-columns: 1fr; gap: 18px;
+    padding: 24px 22px 22px; border: 1px solid var(--line); border-radius: 18px;
+    background: #F7F7F9; box-shadow: 0 1px 0 rgba(28, 19, 23, .04), 0 12px 32px -24px rgba(43, 10, 21, .35);
+  }
+  .svc::before { display: none; }
+  .svc__name { font-size: clamp(2.25rem, 9vw, 3rem); }
+  .svc__body { gap: 18px; }
+  .svc__meta { padding-top: 16px; border-top: 1px solid var(--line); }
+  .svc__meta + .svc__meta { padding-top: 0; border-top: 0; }
+  .svc__cta {
+    justify-content: space-between; width: 100%; min-height: 50px; padding: 0 20px;
+    border: 0; border-radius: 999px; background: var(--velvet); color: var(--limelight);
+  }
   .steps { grid-template-columns: 1fr 1fr; }
   .step:nth-child(3) { padding-left: 0; border-left: 0; }
   .step:nth-child(3)::before { left: 0; }
