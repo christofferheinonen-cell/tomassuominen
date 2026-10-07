@@ -61,15 +61,50 @@
   </section>
 
   <main id="sisalto">
-    <!-- Introduction -->
+    <!-- Client logos. Swap each placeholder for a real logo (SVG or PNG, about 40px tall). The list is duplicated in script.js for the loop. -->
+    <section class="logos" aria-labelledby="logos-otsikko">
+      <div class="logos__inner">
+        <h2 id="logos-otsikko" class="logos__label">Tomakseen ovat luottaneet</h2>
+        <div class="logos__viewport">
+          <ul class="logos__track" data-logo-track>
+            <li><img src="assets/logos/placeholder.svg" alt="Yrityslogo" width="168" height="40" loading="lazy"></li>
+            <li><img src="assets/logos/placeholder.svg" alt="Yrityslogo" width="168" height="40" loading="lazy"></li>
+            <li><img src="assets/logos/placeholder.svg" alt="Yrityslogo" width="168" height="40" loading="lazy"></li>
+            <li><img src="assets/logos/placeholder.svg" alt="Yrityslogo" width="168" height="40" loading="lazy"></li>
+            <li><img src="assets/logos/placeholder.svg" alt="Yrityslogo" width="168" height="40" loading="lazy"></li>
+            <li><img src="assets/logos/placeholder.svg" alt="Yrityslogo" width="168" height="40" loading="lazy"></li>
+            <li><img src="assets/logos/placeholder.svg" alt="Yrityslogo" width="168" height="40" loading="lazy"></li>
+            <li><img src="assets/logos/placeholder.svg" alt="Yrityslogo" width="168" height="40" loading="lazy"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introduction: who Tomas is, plus the voice panel -->
     <section class="intro">
-      <div class="wrap">
-        <p class="intro__text">
-          <strong>Tomas Suominen</strong> on tapahtumien juontaja ja keynote-puhuja, joka tunnetaan suorasta ilmaisusta,
-          lavakarismasta ja kyvystä pitää yleisö mukana alusta loppuun. Hän isännöi yritystapahtumia, VIP-tilaisuuksia,
-          gaaloja ja seminaareja ympäri Suomen.
-        </p>
-        <p class="intro__kicker">Tomaksen karismaattinen ääni ei jätä yleisöä kylmäksi. <em>Se on taattua.</em></p>
+      <div class="wrap intro__grid">
+        <div class="intro__copy">
+          <p class="eyebrow">Kuka Tomas on</p>
+          <p class="intro__text">
+            <strong>Tomas Suominen</strong> on tapahtumien juontaja ja keynote-puhuja, joka tunnetaan
+            <mark class="hl">suorasta ilmaisusta</mark>, <mark class="hl">lavakarismasta</mark> ja kyvystä
+            <mark class="hl">pitää yleisö mukana alusta loppuun</mark>.
+          </p>
+          <ul class="intro__events" aria-label="Tapahtumatyypit">
+            <li>Yritystapahtumat</li>
+            <li>VIP-tilaisuudet</li>
+            <li>Gaalat</li>
+            <li>Seminaarit</li>
+          </ul>
+          <p class="intro__note">Isännöintiä ja puheenvuoroja ympäri Suomen – Helsingistä Ouluun.</p>
+        </div>
+
+        <aside class="voice" aria-label="Tomaksen ääni">
+          <p class="voice__label"><span class="voice__dot" aria-hidden="true"></span>Tomaksen ääni</p>
+          <div class="voice__wave" aria-hidden="true" data-wave></div>
+          <p class="voice__text">Karismaattinen ääni, joka ei jätä yleisöä kylmäksi.</p>
+          <p class="voice__claim">Se on taattua.</p>
+        </aside>
       </div>
     </section>
 

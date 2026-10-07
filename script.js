@@ -81,9 +81,50 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  /* ---------- Client logo loop ---------- */
+  // Duplicate the list once so the track can scroll by half its width and loop without a seam.
+  const track = document.querySelector('[data-logo-track]');
+  if (track) {
+    [...track.children].forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelector('img')?.setAttribute('alt', '');
+      track.appendChild(clone);
+    });
+  }
+
+  /* ---------- Voice waveform ---------- */
+  const wave = document.querySelector('[data-wave]');
+  if (wave) {
+    const bars = 56;
+    let seed = 7;
+    const rand = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+    for (let i = 0; i < bars; i++) {
+      // A speech-like envelope: louder in the middle of phrases, quieter at the ends.
+      const envelope = 0.35 + 0.65 * Math.abs(Math.sin((i / bars) * Math.PI * 2.4));
+      const bar = document.createElement('span');
+      bar.style.setProperty('--h', Math.round(18 + 82 * envelope * (0.45 + 0.55 * rand())));
+      bar.style.setProperty('--d', `${(-rand() * 1.4).toFixed(2)}s`);
+      wave.appendChild(bar);
+    }
+  }
+
+  /* ---------- Intro highlights ---------- */
+  const introText = document.querySelector('.intro__text');
+  if (introText) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      introText.classList.add('is-lit');
+    } else {
+      const hio = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) { introText.classList.add('is-lit'); hio.disconnect(); }
+      }, { threshold: 0.4 });
+      hio.observe(introText);
+    }
+  }
+
   /* ---------- Scroll reveal ---------- */
   if (!reduceMotion && 'IntersectionObserver' in window) {
-    const items = document.querySelectorAll('.intro__text, .intro__kicker, .section-head, .svc, .step, .qa, .booking__head, .form');
+    const items = document.querySelectorAll('.intro__copy, .voice, .section-head, .svc, .step, .qa, .booking__head, .form');
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
