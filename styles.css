@@ -269,8 +269,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   font: 900 clamp(4rem, min(17vw, 21vh), 15rem)/.82 var(--f-display);
   text-transform: uppercase; letter-spacing: -.005em;
 }
-/* padding widens the mask box so glyph tops and the glow are not clipped */
-.marquee__base, .marquee__lit { grid-area: 1 / 1; padding: .14em .2em; margin: -.14em -.2em; }
+/* The padding widens the mask box so glyph tops and the 40px glow fade out before its edge.
+   The fixed 64px matters on phones, where .14em/.2em alone is smaller than the glow and left a visible
+   rectangle; the negative margin cancels the padding so the layout doesn't move. */
+.marquee__base, .marquee__lit {
+  grid-area: 1 / 1;
+  padding: calc(.14em + 64px) calc(.2em + 64px);
+  margin: calc(-.14em - 64px) calc(-.2em - 64px);
+}
 .marquee__base { color: var(--dim); font: inherit; }   /* h1 resets; the margin comes from the shared rule above */
 .marquee__lit {
   color: var(--limelight);
