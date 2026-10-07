@@ -581,6 +581,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .field--wide { grid-column: 1 / -1; }
 .field .opt { text-transform: none; letter-spacing: 0; font-family: var(--f-body); }
 .field label { font: 500 .72rem/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--rose); }
+/* iOS Safari gives date inputs a built-in minimum width and centred text; without this the
+   date field is wider than the form and the dialog scrolls sideways. */
+.field input[type="date"] { -webkit-appearance: none; appearance: none; min-width: 0; display: block; }
+.field input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .field input, .field select, .field textarea {
   width: 100%; font: inherit; font-size: 1rem; color: var(--limelight);
   background: rgba(0, 0, 0, .18);
@@ -641,13 +645,13 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .bk__bar span { display: block; height: 100%; width: 33%; background: var(--limelight); transition: width .45s var(--ease); }
 
 .bk__step, .bk__done {
-  flex: 1 1 auto; min-height: 0; overflow-y: auto;
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden;
   margin: 0; border: 0; padding: 26px clamp(20px, 4vw, 36px) 8px;
 }
 .bk__legend { padding: 0; margin-bottom: 20px; font-size: 1.2rem; font-weight: 600; color: var(--limelight); }
 .bk__step .bk__legend { float: left; width: 100%; }   /* lets the legend sit inside the scroll area */
 .bk__step .bk__legend + * { clear: both; }
-.bk__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 18px; }
+.bk__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px 18px; }
 
 .choices { display: grid; gap: 10px; }
 .choice { position: relative; display: block; cursor: pointer; }
@@ -813,7 +817,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .steps { grid-template-columns: 1fr; border-top: 0; }
   .step, .step + .step { padding: 28px 0 8px 24px; border-left: 1px solid var(--velvet-line); margin-top: 0; border-top: 0; }
   .step::before, .step + .step::before, .step:nth-child(3)::before { left: -5px; top: 34px; }
-  .bk__grid { grid-template-columns: 1fr; }
+  .bk__grid { grid-template-columns: minmax(0, 1fr); }
   .usecases { grid-template-columns: 1fr; }
   .bk { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; border-radius: 0; border: 0; }
   .booking__steps { flex-direction: column; }
