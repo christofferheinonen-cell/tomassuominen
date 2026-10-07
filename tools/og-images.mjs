@@ -7,21 +7,18 @@
 // Re-run after adding a city.
 
 import { chromium } from 'playwright';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { cities } from './cities.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-// Inlined: a page built from a string can't load local stylesheets.
-const css = readFileSync(join(root, 'styles.css'), 'utf8');
 const outDir = join(root, 'assets/og');
 mkdirSync(outDir, { recursive: true });
 
 const card = (eyebrow, line1, line2, chars) => `<!doctype html>
 <html lang="fi"><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>${css}</style>
+<link rel="stylesheet" href="styles.css">
 <style>
   body { margin: 0; background: var(--velvet); }
   .stage { min-height: 630px; height: 630px; padding: 48px; }
@@ -52,7 +49,11 @@ const jobs = [
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 for (const job of jobs) {
-  await page.setContent(job.html, { waitUntil: 'networkidle' });
+  // Rendered from a file in the site root so styles.css and its self-hosted fonts load.
+  const tmp = join(root, '.og-render.html');
+  writeFileSync(tmp, job.html);
+  await page.goto(pathToFileURL(tmp).href, { waitUntil: 'networkidle' });
+  rmSync(tmp);
   await page.screenshot({ path: join(outDir, `${job.file}.jpg`), type: 'jpeg', quality: 86 });
   console.log(`wrote assets/og/${job.file}.jpg`);
 }

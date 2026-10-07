@@ -309,6 +309,92 @@
     showStep(0);
   }
 
+  /* ---------- Cookie consent ---------- */
+  // The site sets no cookies and loads no tracking, so no banner is needed and none is shown.
+  // To add analytics or an ad pixel, list it here. The banner then appears, and the service
+  // loads only after the visitor accepts it; "Vain välttämättömät" is as easy as accepting.
+  // Update the cookie section of the privacy policy (tools/legal.mjs) at the same time.
+  //
+  //   { id: 'analytics', name: 'Kävijätilastot', description: 'Kertoo, miten sivustoa käytetään.', load() { /* add the script tag */ } }
+  const OPTIONAL_SERVICES = [];
+  const CONSENT_KEY = 'ts-consent';
+  const CONSENT_VERSION = 1;   // raise when the list of services changes, so visitors are asked again
+
+  const readConsent = () => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(CONSENT_KEY));
+      return saved && saved.version === CONSENT_VERSION ? saved.choices : null;
+    } catch { return null; }
+  };
+  const loaded = new Set();
+  const applyConsent = (choices) => {
+    OPTIONAL_SERVICES.forEach((service) => {
+      if (choices[service.id] && !loaded.has(service.id)) { loaded.add(service.id); service.load(); }
+    });
+  };
+  const saveConsent = (choices) => {
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ version: CONSENT_VERSION, choices, at: new Date().toISOString() })); } catch { /* private mode: ask again next time */ }
+    applyConsent(choices);
+  };
+
+  if (OPTIONAL_SERVICES.length) {
+    const policyHref = document.querySelector('a[href$="tietosuoja/"]')?.getAttribute('href') || 'tietosuoja/';
+    const banner = document.createElement('section');
+    banner.className = 'consent';
+    banner.setAttribute('aria-label', 'Evästeasetukset');
+    banner.hidden = true;
+    banner.innerHTML = `
+      <div class="consent__inner">
+        <p class="consent__title">Evästeet</p>
+        <p class="consent__text">Käytämme valinnaisia evästeitä vain suostumuksellasi: ${OPTIONAL_SERVICES.map((sv) => sv.name.toLowerCase()).join(', ')}. Sivusto toimii myös ilman niitä. <a href="${policyHref}">Tietosuojaseloste</a></p>
+        <div class="consent__choices" hidden>
+          <label class="consent__choice"><input type="checkbox" checked disabled><span><strong>Välttämättömät</strong> Sivuston toiminta ja tämä valinta. Aina päällä.</span></label>
+          ${OPTIONAL_SERVICES.map((sv) => `<label class="consent__choice"><input type="checkbox" data-service-id="${sv.id}"><span><strong>${sv.name}</strong> ${sv.description}</span></label>`).join('')}
+        </div>
+        <div class="consent__actions">
+          <button class="btn btn--ghost btn--sm" type="button" data-consent="necessary">Vain välttämättömät</button>
+          <button class="btn btn--ghost btn--sm" type="button" data-consent="choose">Valitse</button>
+          <button class="btn btn--ghost btn--sm" type="button" data-consent="save" hidden>Tallenna valinnat</button>
+          <button class="btn btn--light btn--sm" type="button" data-consent="all">Hyväksy kaikki</button>
+        </div>
+      </div>`;
+    document.body.appendChild(banner);
+
+    const choicesBox = banner.querySelector('.consent__choices');
+    const boxes = [...banner.querySelectorAll('[data-service-id]')];
+    const btn = (name) => banner.querySelector(`[data-consent="${name}"]`);
+    const show = (current) => {
+      boxes.forEach((box) => { box.checked = Boolean(current && current[box.dataset.serviceId]); });
+      banner.hidden = false;
+    };
+    const finish = (choices) => {
+      saveConsent(choices);
+      banner.hidden = true;
+      choicesBox.hidden = true;
+      btn('choose').hidden = false;
+      btn('save').hidden = true;
+    };
+    const all = (value) => Object.fromEntries(OPTIONAL_SERVICES.map((sv) => [sv.id, value]));
+
+    btn('all').addEventListener('click', () => finish(all(true)));
+    btn('necessary').addEventListener('click', () => finish(all(false)));
+    btn('choose').addEventListener('click', () => {
+      choicesBox.hidden = false;
+      btn('choose').hidden = true;
+      btn('save').hidden = false;
+      boxes[0]?.focus();
+    });
+    btn('save').addEventListener('click', () => finish(Object.fromEntries(boxes.map((box) => [box.dataset.serviceId, box.checked]))));
+
+    // Footer link to change the choice later.
+    document.querySelectorAll('[data-consent-link]').forEach((li) => { li.hidden = false; });
+    document.querySelectorAll('[data-consent-open]').forEach((b) => b.addEventListener('click', () => show(readConsent())));
+
+    const saved = readConsent();
+    if (saved) applyConsent(saved);
+    else show(null);
+  }
+
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
 })();

@@ -1,4 +1,4 @@
-// City landing pages. Add a city here, then run: node tools/build-cities.mjs
+// City landing pages. Add a city here, then run: node tools/build.mjs
 //
 // Keep each city's text genuinely about that city. Search engines treat pages
 // that differ only by the city name as "doorway pages" and rank them down.
