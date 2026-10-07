@@ -346,7 +346,10 @@
       </div>
     </section>
 
-    <!-- Services: not a sequence, so no numbering. Each row's button preselects the service in the form. -->
+    <!-- Services: not a sequence, so no numbering. Each row's button preselects the service in the form.
+         On wide screens script.js copies the images into a sticky panel that crossfades as the services
+         scroll past; on phones each image sits in its own card. The images are placeholder illustrations:
+         swap in photos (assets/services/*.jpg, 4:5) and give them real alt text. -->
     <section class="services" id="palvelut" aria-labelledby="palvelut-otsikko">
       <div class="wrap">
         <header class="section-head">
@@ -354,8 +357,10 @@
           <h2 id="palvelut-otsikko" class="section-title">Palvelut Espoossa</h2>
         </header>
 
+        <div class="svc-layout">
         <ul class="svc-list">
           <li class="svc">
+            <figure class="svc__media"><img src="../assets/services/juonnot.svg" alt="" width="800" height="1000" loading="lazy"></figure>
             <h3 class="svc__name">Juonnot</h3>
             <div class="svc__body">
               <p>Tomas juontaa yritystapahtumat, gaalat ja seminaarit niin, että aikataulu pitää ja tunnelma nousee. Hän lukee salia, reagoi hetkeen ja pitää langat käsissään koko tilaisuuden ajan – ammattimaisesti eri Suomen kaupungeissa.</p>
@@ -364,6 +369,7 @@
           </li>
 
           <li class="svc">
+            <figure class="svc__media"><img src="../assets/services/puhujakeikat.svg" alt="" width="800" height="1000" loading="lazy"></figure>
             <h3 class="svc__name">Puhujakeikat</h3>
             <div class="svc__body">
               <p>Tomaksen puheenvuorot ovat inspiroivia, yhteisöllisiä ja käytännönläheisiä. Sopii yrityksille, oppilaitoksille ja tapahtumiin, joissa halutaan herättää ajattelua ja saada ihmiset liikkeelle.</p>
@@ -373,6 +379,7 @@
           </li>
 
           <li class="svc">
+            <figure class="svc__media"><img src="../assets/services/vip.svg" alt="" width="800" height="1000" loading="lazy"></figure>
             <h3 class="svc__name">VIP Hosting</h3>
             <div class="svc__body">
               <p>Kun yleisö tai vieraslista on A-luokkaa, myös isännöinnin pitää olla. Tomas hoitaa VIP-tilaisuudet tyylillä ja tilannetajulla, joka saa ihmiset tuntemaan olonsa tervetulleiksi ilman päällekäyvää show’ta. VIP Hosting toimii gaaloissa, yrityksen juhlatilaisuuksissa ja premium-asiakastapahtumissa.</p>
@@ -381,6 +388,7 @@
           </li>
 
           <li class="svc">
+            <figure class="svc__media"><img src="../assets/services/aaninayttely.svg" alt="" width="800" height="1000" loading="lazy"></figure>
             <h3 class="svc__name">Ääninäyttely</h3>
             <div class="svc__body">
               <p>Korkealaatuista äänityötä mainoksiin, videoihin, animaatioihin, yritysten sisäiseen koulutukseen ja muihin mediatuotantoihin. Selkeä artikulointi, monipuolinen äänenkäyttö ja vahva läsnäolo tuovat sävyä tuotantoon ja tekevät brändistä kuuluvan.</p>
@@ -389,6 +397,7 @@
           </li>
 
           <li class="svc">
+            <figure class="svc__media"><img src="../assets/services/muut.svg" alt="" width="800" height="1000" loading="lazy"></figure>
             <h3 class="svc__name">Muut</h3>
             <div class="svc__body">
               <p>Kaikki, mikä ei mene siistiin lokeroon: some-sisällöt, tuotelanseeraukset, brändi-hostaus ja konseptien elävöittäminen lavalla ja kameran edessä.</p>
@@ -396,6 +405,8 @@
             <a class="svc__cta" href="#varaa" data-book data-service="Muu">Kerro ideasi <span aria-hidden="true">→</span></a>
           </li>
         </ul>
+        <div class="svc-stage" aria-hidden="true" data-svc-stage></div>
+        </div>
       </div>
     </section>
 

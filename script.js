@@ -133,6 +133,43 @@
     items.forEach((el) => { el.classList.add('reveal'); io.observe(el); });
   }
 
+  /* ---------- Services: sticky image that follows the scroll ---------- */
+  // Copies each service's image into one sticky panel and crossfades to the service
+  // that is crossing the middle of the screen. CSS shows the panel only on wide screens.
+  const svcStage = document.querySelector('[data-svc-stage]');
+  if (svcStage && 'IntersectionObserver' in window) {
+    const section = svcStage.closest('.services');
+    const items = [...section.querySelectorAll('.svc')];
+    const images = items.map((item) => {
+      const img = item.querySelector('.svc__media img').cloneNode();
+      img.className = 'svc-stage__img';
+      img.loading = 'eager';
+      svcStage.appendChild(img);
+      return img;
+    });
+    const caption = document.createElement('p');
+    caption.className = 'svc-stage__caption';
+    svcStage.appendChild(caption);
+
+    let active = -1;
+    const setActive = (i) => {
+      if (i === active) return;
+      active = i;
+      items.forEach((item, n) => item.classList.toggle('is-active', n === i));
+      images.forEach((img, n) => img.classList.toggle('is-active', n === i));
+      caption.textContent = items[i].querySelector('.svc__name').textContent;
+    };
+
+    // A thin band across the middle of the viewport decides which service is "on stage".
+    const svcObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) setActive(items.indexOf(entry.target)); });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    items.forEach((item) => svcObserver.observe(item));
+
+    setActive(0);
+    section.classList.add('has-stage');
+  }
+
   /* ---------- Booking dialog ---------- */
   const dialog = document.getElementById('booking-dialog');
   const form = dialog && dialog.querySelector('[data-booking-form]');
