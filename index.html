@@ -26,7 +26,7 @@
         <li><a href="#ukk">UKK</a></li>
       </ul>
     </nav>
-    <a class="btn btn--light btn--sm" href="#varaa">Varaa keikka</a>
+    <a class="btn btn--light btn--sm" href="#varaa" data-book>Varaa keikka</a>
   </header>
 
   <!-- Hero: a dark stage. The name sits in a spotlight that follows the pointer. -->
@@ -54,7 +54,7 @@
       </p>
 
       <div class="stage__actions">
-        <a class="btn btn--light" href="#varaa">Varaa keikka</a>
+        <a class="btn btn--light" href="#varaa" data-book>Varaa keikka</a>
         <a class="btn btn--ghost" href="#palvelut">Tutustu palveluihin</a>
       </div>
     </div>
@@ -123,7 +123,7 @@
               <p>Tomas juontaa yritystapahtumat, gaalat ja seminaarit niin, että aikataulu pitää ja tunnelma nousee. Hän lukee salia, reagoi hetkeen ja pitää langat käsissään koko tilaisuuden ajan – ammattimaisesti eri Suomen kaupungeissa.</p>
               <p class="svc__cities"><span>Suositut juontokaupungit</span>Helsinki, Tampere, Turku, Oulu, Espoo, Vantaa, Lahti, Jyväskylä, Kuopio, Vaasa</p>
             </div>
-            <a class="svc__cta" href="#varaa" data-service="Juonto">Varaa juontaja <span aria-hidden="true">→</span></a>
+            <a class="svc__cta" href="#varaa" data-book data-service="Juonto">Varaa juontaja <span aria-hidden="true">→</span></a>
           </li>
 
           <li class="svc">
@@ -133,7 +133,7 @@
               <p class="svc__cities"><span>Teemoja</span>Rohkeus, yhteisöllisyys, itsensä ylittäminen</p>
               <p class="svc__cities"><span>Suositut puhujakaupungit</span>Helsinki, Tampere, Turku, Oulu, Pori, Seinäjoki, Joensuu, Hämeenlinna, Lappeenranta</p>
             </div>
-            <a class="svc__cta" href="#varaa" data-service="Puheenvuoro">Varaa puhuja <span aria-hidden="true">→</span></a>
+            <a class="svc__cta" href="#varaa" data-book data-service="Puheenvuoro">Varaa puhuja <span aria-hidden="true">→</span></a>
           </li>
 
           <li class="svc">
@@ -142,7 +142,7 @@
               <p>Kun yleisö tai vieraslista on A-luokkaa, myös isännöinnin pitää olla. Tomas hoitaa VIP-tilaisuudet tyylillä ja tilannetajulla, joka saa ihmiset tuntemaan olonsa tervetulleiksi ilman päällekäyvää show’ta. VIP Hosting toimii gaaloissa, yrityksen juhlatilaisuuksissa ja premium-asiakastapahtumissa.</p>
               <p class="svc__cities"><span>Suositut VIP-keikkakaupungit</span>Helsinki, Espoo, Tampere, Turku, Oulu, Vaasa</p>
             </div>
-            <a class="svc__cta" href="#varaa" data-service="VIP Hosting">Varaa VIP-isäntä <span aria-hidden="true">→</span></a>
+            <a class="svc__cta" href="#varaa" data-book data-service="VIP Hosting">Varaa VIP-isäntä <span aria-hidden="true">→</span></a>
           </li>
 
           <li class="svc">
@@ -150,7 +150,7 @@
             <div class="svc__body">
               <p>Korkealaatuista äänityötä mainoksiin, videoihin, animaatioihin, yritysten sisäiseen koulutukseen ja muihin mediatuotantoihin. Selkeä artikulointi, monipuolinen äänenkäyttö ja vahva läsnäolo tuovat sävyä tuotantoon ja tekevät brändistä kuuluvan.</p>
             </div>
-            <a class="svc__cta" href="#varaa" data-service="Ääninäyttely">Tilaa äänityö <span aria-hidden="true">→</span></a>
+            <a class="svc__cta" href="#varaa" data-book data-service="Ääninäyttely">Tilaa äänityö <span aria-hidden="true">→</span></a>
           </li>
 
           <li class="svc">
@@ -158,7 +158,7 @@
             <div class="svc__body">
               <p>Kaikki, mikä ei mene siistiin lokeroon: some-sisällöt, tuotelanseeraukset, brändi-hostaus ja konseptien elävöittäminen lavalla ja kameran edessä.</p>
             </div>
-            <a class="svc__cta" href="#varaa" data-service="Muu">Kerro ideasi <span aria-hidden="true">→</span></a>
+            <a class="svc__cta" href="#varaa" data-book data-service="Muu">Kerro ideasi <span aria-hidden="true">→</span></a>
           </li>
         </ul>
       </div>
@@ -223,7 +223,7 @@
 
         <details class="qa">
           <summary>Miten voin varata Tomaksen juontajaksi tai puhujaksi tapahtumaani?</summary>
-          <p>Täytä sivun lopussa oleva lomake ja kerro, mitä, missä ja milloin. Tomas vastaa ja ehdottaa tapahtumaasi sopivaa kokonaisuutta. Mitä aiemmin olet yhteydessä, sitä varmemmin päivä on vielä vapaana.</p>
+          <p>Paina mitä tahansa <a href="#varaa" data-book>Varaa keikka</a> -painiketta ja kerro, mitä, missä ja milloin. Tomas vastaa ja ehdottaa tapahtumaasi sopivaa kokonaisuutta. Mitä aiemmin olet yhteydessä, sitä varmemmin päivä on vielä vapaana.</p>
         </details>
         <details class="qa">
           <summary>Millaisiin tapahtumiin Tomas sopii parhaiten?</summary>
@@ -236,49 +236,23 @@
       </div>
     </section>
 
-    <!-- Booking -->
+    <!-- Booking: closing call to action. The form itself lives in the dialog below. -->
     <section class="booking" id="varaa" aria-labelledby="varaa-otsikko">
       <div class="wrap booking__grid">
         <header class="booking__head">
           <p class="eyebrow eyebrow--stage">Varaa keikka</p>
           <h2 id="varaa-otsikko" class="booking__title">Varaa Tomas tapahtumaasi</h2>
-          <p class="section-sub">Kerro lyhyesti tapahtumastasi. Tomas vastaa ja ehdottaa sopivaa kokonaisuutta.</p>
         </header>
-
-        <!-- Set data-endpoint to the form backend (e.g. a Formspree URL) before going live. -->
-        <form class="form" data-booking-form data-endpoint="" novalidate>
-          <div class="field">
-            <label for="f-name">Nimi</label>
-            <input id="f-name" name="nimi" type="text" autocomplete="name" placeholder="Etunimi Sukunimi" required>
-          </div>
-          <div class="field">
-            <label for="f-email">Sähköpostiosoite</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="nimi@yritys.fi" required>
-          </div>
-          <div class="field">
-            <label for="f-company">Yritys</label>
-            <input id="f-company" name="yritys" type="text" autocomplete="organization" placeholder="Yritys Oy">
-          </div>
-          <div class="field">
-            <label for="f-service">Mitä tarvitset?</label>
-            <select id="f-service" name="palvelu">
-              <option value="">Valitse palvelu</option>
-              <option>Juonto</option>
-              <option>Puheenvuoro</option>
-              <option>VIP Hosting</option>
-              <option>Ääninäyttely</option>
-              <option>Muu</option>
-            </select>
-          </div>
-          <div class="field field--wide">
-            <label for="f-msg">Kerro tapahtumasta</label>
-            <textarea id="f-msg" name="viesti" rows="5" placeholder="Mitä, missä, milloin, kuinka suurelle yleisölle?" required></textarea>
-          </div>
-          <div class="form__foot field--wide">
-            <button class="btn btn--light" type="submit">Lähetä tiedustelu</button>
-            <p class="form__status" role="status" aria-live="polite"></p>
-          </div>
-        </form>
+        <div class="booking__body">
+          <p class="booking__lede">Kerro tapahtumastasi kolmella lyhyellä askeleella. Tiedustelu menee suoraan Tomakselle, ja hän vastaa sähköpostiisi.</p>
+          <ol class="booking__steps">
+            <li><span>1</span>Mitä tarvitset</li>
+            <li><span>2</span>Tapahtuman tiedot</li>
+            <li><span>3</span>Yhteystiedot</li>
+          </ol>
+          <a class="btn btn--light btn--lg" href="#varaa" data-book>Aloita tiedustelu</a>
+          <p class="booking__hint">Vie noin kaksi minuuttia.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -295,6 +269,164 @@
       <p class="footer__meta">© <span data-year>2026</span> Tomas Suominen · Design: Christoffer Heinonen</p>
     </div>
   </footer>
+
+
+  <!--
+    Booking dialog. Submissions are POSTed to data-endpoint, which emails them on.
+    Set data-endpoint to your Formspree form URL (https://formspree.io/f/xxxxxxx).
+    Field names are what appear in the email, so they are written in Finnish.
+  -->
+  <dialog class="bk" id="booking-dialog" aria-labelledby="bk-title">
+    <form class="bk__form" data-booking-form data-endpoint="" novalidate>
+      <header class="bk__head">
+        <div>
+          <p class="bk__progress" data-progress>Vaihe 1/3</p>
+          <h2 class="bk__title" id="bk-title">Varaa Tomas</h2>
+        </div>
+        <button class="bk__close" type="button" data-close aria-label="Sulje lomake">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <div class="bk__bar" aria-hidden="true"><span data-bar></span></div>
+      </header>
+
+      <!-- Step 1: service -->
+      <fieldset class="bk__step" data-step="1">
+        <legend class="bk__legend">Mitä tarvitset?</legend>
+        <div class="choices">
+              <label class="choice">
+                <input type="radio" name="Palvelu" value="Juonto" required>
+                <span class="choice__body"><span class="choice__title">Juonto</span><span class="choice__desc">Tapahtuman, gaalan tai seminaarin juontaja</span></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="Palvelu" value="Puheenvuoro" required>
+                <span class="choice__body"><span class="choice__title">Puheenvuoro</span><span class="choice__desc">Inspiroiva keynote tai puhujakeikka</span></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="Palvelu" value="VIP Hosting" required>
+                <span class="choice__body"><span class="choice__title">VIP Hosting</span><span class="choice__desc">Illan isäntä VIP- ja asiakastilaisuuteen</span></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="Palvelu" value="Ääninäyttely" required>
+                <span class="choice__body"><span class="choice__title">Ääninäyttely</span><span class="choice__desc">Ääni mainokseen, videoon tai koulutukseen</span></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="Palvelu" value="Muu" required>
+                <span class="choice__body"><span class="choice__title">Jotain muuta</span><span class="choice__desc">Somesisältö, lanseeraus tai oma idea</span></span>
+              </label>
+        </div>
+        <p class="bk__error" data-error-for="Palvelu">Valitse yksi vaihtoehto.</p>
+      </fieldset>
+
+      <!-- Step 2: event details -->
+      <fieldset class="bk__step" data-step="2" hidden>
+        <legend class="bk__legend">Kerro tapahtumasta</legend>
+        <div class="bk__grid">
+          <div class="field">
+            <label for="bk-type">Tapahtuman tyyppi</label>
+            <select id="bk-type" name="Tapahtuman tyyppi" required>
+              <option value="">Valitse</option>
+              <option>Yritystapahtuma</option>
+              <option>Gaala tai juhla</option>
+              <option>Seminaari tai konferenssi</option>
+              <option>Asiakastilaisuus</option>
+              <option>Oppilaitoksen tapahtuma</option>
+              <option>Media- tai äänituotanto</option>
+              <option>Muu</option>
+            </select>
+            <p class="bk__error">Valitse tapahtuman tyyppi.</p>
+          </div>
+          <div class="field">
+            <label for="bk-date">Päivämäärä</label>
+            <input id="bk-date" name="Päivämäärä" type="date" required>
+            <label class="check"><input type="checkbox" data-date-open> Päivä ei ole vielä varma</label>
+            <p class="bk__error">Valitse päivä tai merkitse, ettei se ole vielä varma.</p>
+          </div>
+          <div class="field">
+            <label for="bk-city">Paikkakunta</label>
+            <input id="bk-city" name="Paikkakunta" type="text" placeholder="Esim. Helsinki tai etänä" autocomplete="address-level2" required>
+            <p class="bk__error">Kerro, missä tapahtuma järjestetään.</p>
+          </div>
+          <div class="field">
+            <label for="bk-size">Yleisön koko</label>
+            <select id="bk-size" name="Yleisön koko">
+              <option value="">Valitse</option>
+              <option>Alle 50</option>
+              <option>50–150</option>
+              <option>150–500</option>
+              <option>Yli 500</option>
+              <option>Ei yleisöä (äänityö)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bk-lang">Tapahtuman kieli</label>
+            <select id="bk-lang" name="Kieli">
+              <option>Suomi</option>
+              <option>Englanti</option>
+              <option>Suomi ja englanti</option>
+              <option>Muu</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bk-budget">Budjetti <span class="opt">(valinnainen)</span></label>
+            <select id="bk-budget" name="Budjetti">
+              <option value="">En osaa sanoa</option>
+              <option>Alle 1 000 €</option>
+              <option>1 000–2 500 €</option>
+              <option>2 500–5 000 €</option>
+              <option>Yli 5 000 €</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Step 3: contact -->
+      <fieldset class="bk__step" data-step="3" hidden>
+        <legend class="bk__legend">Kenelle Tomas vastaa?</legend>
+        <div class="bk__grid">
+          <div class="field">
+            <label for="bk-name">Nimi</label>
+            <input id="bk-name" name="Nimi" type="text" autocomplete="name" placeholder="Etunimi Sukunimi" required>
+            <p class="bk__error">Kirjoita nimesi.</p>
+          </div>
+          <div class="field">
+            <label for="bk-company">Yritys tai organisaatio</label>
+            <input id="bk-company" name="Yritys" type="text" autocomplete="organization" placeholder="Yritys Oy">
+          </div>
+          <div class="field">
+            <label for="bk-email">Sähköposti</label>
+            <input id="bk-email" name="email" type="email" autocomplete="email" placeholder="nimi@yritys.fi" required>
+            <p class="bk__error">Kirjoita toimiva sähköpostiosoite.</p>
+          </div>
+          <div class="field">
+            <label for="bk-phone">Puhelin <span class="opt">(valinnainen)</span></label>
+            <input id="bk-phone" name="Puhelin" type="tel" autocomplete="tel" placeholder="040 123 4567">
+          </div>
+          <div class="field field--wide">
+            <label for="bk-msg">Lisätiedot <span class="opt">(valinnainen)</span></label>
+            <textarea id="bk-msg" name="Lisätiedot" rows="4" placeholder="Tapahtuman teema, aikataulu, toiveet juonnolle tai puheelle…"></textarea>
+          </div>
+        </div>
+        <!-- Spam trap: people never see or fill this; Formspree drops submissions that do. -->
+        <input class="bk__trap" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_subject" value="Uusi keikkatiedustelu" data-subject>
+      </fieldset>
+
+      <!-- Sent -->
+      <div class="bk__done" data-done hidden tabindex="-1">
+        <p class="bk__done-mark" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+        <h3 class="bk__legend">Tiedustelu lähetetty</h3>
+        <p>Kiitos! Tomas vastaa osoitteeseen <strong data-done-email></strong>.</p>
+        <button class="btn btn--light" type="button" data-close>Sulje</button>
+      </div>
+
+      <footer class="bk__foot" data-foot>
+        <button class="btn btn--ghost" type="button" data-back hidden>Takaisin</button>
+        <p class="bk__status" role="status" aria-live="polite" data-status></p>
+        <button class="btn btn--light" type="button" data-next>Seuraava</button>
+        <button class="btn btn--light" type="submit" data-submit hidden>Lähetä tiedustelu</button>
+      </footer>
+    </form>
+  </dialog>
 
   <script src="script.js" defer></script>
 </body>
