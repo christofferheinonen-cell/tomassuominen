@@ -517,22 +517,23 @@
       </nav>
       <!-- @/cities -->
       <ul class="footer__links">
-        <!-- Replace # with the real profile URLs and email address. -->
+        <!-- Replace # with the real profile URLs. -->
         <li><a href="#">LinkedIn</a></li>
         <li><a href="#">Instagram</a></li>
-        <li><a href="#">Sähköposti</a></li>
+        <li><a href="mailto:tomas.suominen@hotmail.com">Sähköposti</a></li>
       </ul>
       <p class="footer__meta">© <span data-year>2026</span> Tomas Suominen · Design: Christoffer Heinonen</p>
     </div>
   </footer>
 
   <!--
-    Booking dialog. Submissions are POSTed to data-endpoint, which emails them on.
-    Set data-endpoint to your Formspree form URL (https://formspree.io/f/xxxxxxx).
+    Booking dialog. Submissions are POSTed to data-endpoint, and FormSubmit (formsubmit.co) emails them on.
+    The first submission sends an activation email to the address; nothing is delivered until it is confirmed.
+    After activating, FormSubmit offers a random alias: swap it in for the address so bots can't harvest it.
     Field names are what appear in the email, so they are written in Finnish.
   -->
   <dialog class="bk" id="booking-dialog" aria-labelledby="bk-title">
-    <form class="bk__form" data-booking-form data-endpoint="" novalidate>
+    <form class="bk__form" data-booking-form data-endpoint="https://formsubmit.co/ajax/tomas.suominen@hotmail.com" novalidate>
       <header class="bk__head">
         <div>
           <p class="bk__progress" data-progress>Vaihe 1/3</p>
@@ -661,8 +662,11 @@
             <textarea id="bk-msg" name="Lisätiedot" rows="4" placeholder="Tapahtuman teema, aikataulu, toiveet juonnolle tai puheelle…"></textarea>
           </div>
         </div>
-        <!-- Spam trap: people never see or fill this; Formspree drops submissions that do. -->
-        <input class="bk__trap" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <!-- Spam trap: people never see or fill this; FormSubmit drops submissions that do. -->
+        <input class="bk__trap" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <!-- FormSubmit settings: answers as a table in the email, no captcha page (submissions go over fetch). -->
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="Uusi keikkatiedustelu" data-subject>
       </fieldset>
 

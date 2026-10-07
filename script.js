@@ -282,14 +282,16 @@
       if (pageCity) data.set('Lähde', `${pageCity}-sivu`);
       data.set('_subject', form.querySelector('[data-subject]').value);
       if (dateOpen.checked) data.set('Päivämäärä', 'Ei vielä varma');
-      // Leave empty optional answers out of the email.
-      [...data.keys()].forEach((key) => { if (key !== '_gotcha' && data.get(key) === '') data.delete(key); });
+      // Leave empty optional answers out of the email (settings starting with _ stay).
+      [...data.keys()].forEach((key) => { if (!key.startsWith('_') && data.get(key) === '') data.delete(key); });
 
       submitBtn.disabled = true;
       setStatus('Lähetetään…');
       try {
         const res = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: data });
-        if (!res.ok) throw new Error(String(res.status));
+        // FormSubmit can answer 200 with success "false" (e.g. before the address is activated).
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok || String(body.success) === 'false') throw new Error(body.message || String(res.status));
         form.querySelector('[data-done-email]').textContent = data.get('email');
         steps.forEach((step) => { step.hidden = true; });
         foot.hidden = true;

@@ -23,5 +23,11 @@ doorway pages to search engines. Add real gigs to `references` as they happen.
 
 ## Booking form
 
-Set `data-endpoint` on the form in `index.html` to a Formspree URL, then re-run the city build so the
+Enquiries are sent with FormSubmit (formsubmit.co) to the address in the form's `data-endpoint` in
+`index.html` (currently tomas.suominen@hotmail.com). After changing it, re-run the city build so the
 city pages pick it up.
+
+- The first enquiry triggers an activation email to that address. Nothing is delivered until the link
+  in it is clicked, so send a test enquiry yourself right after going live.
+- After activation FormSubmit offers a random alias for the address. Use it in `data-endpoint` so the
+  address isn't readable in the page source.
