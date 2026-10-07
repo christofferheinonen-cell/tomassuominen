@@ -149,6 +149,9 @@
     const status = form.querySelector('[data-status]');
     const dateInput = form.querySelector('#bk-date');
     const dateOpen = form.querySelector('[data-date-open]');
+    // City landing pages set <body data-city="…">: prefill the city and tag the enquiry with its source.
+    const pageCity = document.body.dataset.city || '';
+    const cityInput = form.querySelector('#bk-city');
     let current = 0;
     let opener = null;
 
@@ -184,6 +187,7 @@
         const radio = form.querySelector(`input[name="Palvelu"][value="${service}"]`);
         if (radio) { radio.checked = true; showStep(1); }
       }
+      if (pageCity && !cityInput.value) cityInput.value = pageCity;
       opener = trigger;
       dialog.showModal();
       document.documentElement.classList.add('has-dialog');
@@ -274,7 +278,8 @@
       const data = new FormData(form);
       const service = data.get('Palvelu');
       const who = data.get('Yritys') || data.get('Nimi');
-      form.querySelector('[data-subject]').value = `Keikkatiedustelu: ${service} – ${who}`;
+      form.querySelector('[data-subject]').value = `Keikkatiedustelu: ${service} – ${who}${pageCity ? ` (${pageCity}-sivu)` : ''}`;
+      if (pageCity) data.set('Lähde', `${pageCity}-sivu`);
       data.set('_subject', form.querySelector('[data-subject]').value);
       if (dateOpen.checked) data.set('Päivämäärä', 'Ei vielä varma');
       // Leave empty optional answers out of the email.
