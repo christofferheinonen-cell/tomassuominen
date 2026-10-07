@@ -124,7 +124,7 @@
 
   /* ---------- Scroll reveal ---------- */
   if (!reduceMotion && 'IntersectionObserver' in window) {
-    const items = document.querySelectorAll('.intro__copy, .voice, .section-head, .svc, .step, .qa, .booking__head, .booking__body');
+    const items = document.querySelectorAll('.intro__copy, .voice, .section-head, .step, .qa, .booking__head, .booking__body');
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
@@ -168,6 +168,51 @@
 
     setActive(0);
     section.classList.add('has-stage');
+  }
+
+  /* ---------- Services on phones: cards that stack as you scroll ---------- */
+  // Each card sticks below the nav and the next one slides over it. A card sticks only once
+  // it is fully on screen (its sticking point is capped by its own height), so a tall card's
+  // button is always reachable before it gets covered. Covered cards shrink and dim a little.
+  const stackItems = [...document.querySelectorAll('.services .svc')];
+  if (stackItems.length > 1) {
+    const stackSection = stackItems[0].closest('.services');
+    const stackMq = window.matchMedia('(max-width: 960px)');
+    const navEl = document.querySelector('[data-nav]');
+    let stackFrame = 0;
+
+    const paintStack = () => {
+      stackFrame = 0;
+      if (!stackMq.matches || reduceMotion) return;
+      stackItems.forEach((card, i) => {
+        const next = stackItems[i + 1];
+        if (!next) return;
+        const r = card.getBoundingClientRect();
+        // How far the next card has slid over this one, 0…1.
+        const p = Math.min(1, Math.max(0, (r.bottom - next.getBoundingClientRect().top) / r.height));
+        card.style.setProperty('--stack-scale', (1 - p * 0.06).toFixed(3));
+        card.style.setProperty('--stack-dim', (1 - p * 0.14).toFixed(3));
+      });
+    };
+    const layoutStack = () => {
+      if (!stackMq.matches) {
+        stackItems.forEach((card) => ['--stick', '--stack-scale', '--stack-dim'].forEach((v) => card.style.removeProperty(v)));
+        return;
+      }
+      const navH = navEl ? navEl.offsetHeight : 0;
+      stackItems.forEach((card, i) => {
+        const top = Math.min(navH + 12 + i * 10, window.innerHeight - card.offsetHeight - 12);
+        card.style.setProperty('--stick', `${Math.round(top)}px`);
+      });
+      paintStack();
+    };
+
+    stackSection.classList.add('has-stack');
+    layoutStack();
+    window.addEventListener('resize', layoutStack);
+    window.addEventListener('load', layoutStack);          // card heights settle once fonts and images load
+    stackMq.addEventListener('change', layoutStack);
+    window.addEventListener('scroll', () => { if (!stackFrame) stackFrame = requestAnimationFrame(paintStack); }, { passive: true });
   }
 
   /* ---------- Booking dialog ---------- */
