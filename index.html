@@ -12,6 +12,10 @@
   <link rel="canonical" href="https://www.tomassuominen.fi/">
   <meta property="og:url" content="https://www.tomassuominen.fi/">
   <meta property="og:locale" content="fi_FI">
+  <meta property="og:image" content="https://www.tomassuominen.fi/assets/og/home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -27,7 +31,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800;900&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -55,10 +59,11 @@
     <div class="stage__inner">
       <p class="eyebrow eyebrow--stage">Juontaja · Keynote-puhuja · VIP-isäntä · Ääni</p>
 
-      <h1 class="marquee">
-        <span class="marquee__base">Tomas<br>Suominen</span>
+      <!-- The heading holds the text once; the lit copy is a sibling so search engines don't read it twice. -->
+      <div class="marquee">
+        <h1 class="marquee__base">Tomas<br>Suominen</h1>
         <span class="marquee__lit" aria-hidden="true">Tomas<br>Suominen</span>
-      </h1>
+      </div>
 
       <figure class="portrait">
         <!-- Replace assets/tomas.jpg with the portrait from the current site (square, at least 600×600). -->
@@ -287,7 +292,7 @@
       <!-- @cities -->
       <nav class="footer__cities" aria-label="Kaupungit">
         <p class="footer__cities-label">Juontaja ja puhuja</p>
-        <ul><li><a href="juontaja-helsinki/">Helsinki</a></li></ul>
+        <ul><li><a href="juontaja-helsinki/">Helsinki</a></li><li><a href="juontaja-espoo/">Espoo</a></li><li><a href="juontaja-vantaa/">Vantaa</a></li><li><a href="juontaja-tampere/">Tampere</a></li><li><a href="juontaja-oulu/">Oulu</a></li><li><a href="juontaja-turku/">Turku</a></li><li><a href="juontaja-lahti/">Lahti</a></li><li><a href="juontaja-jyvaskyla/">Jyväskylä</a></li><li><a href="juontaja-seinajoki/">Seinäjoki</a></li><li><a href="juontaja-rovaniemi/">Rovaniemi</a></li><li><a href="juontaja-pori/">Pori</a></li><li><a href="juontaja-vaasa/">Vaasa</a></li></ul>
       </nav>
       <!-- @/cities -->
       <ul class="footer__links">

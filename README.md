@@ -8,7 +8,11 @@ City pages (e.g. `juontaja-helsinki/index.html`) are generated. Don't edit them 
 
 1. Add or edit a city in `tools/cities.mjs`.
 2. Run `node tools/build-cities.mjs`.
-3. Commit the generated folder, `index.html` (its footer city links) and `sitemap.xml`.
+3. Run `node tools/og-images.mjs` to render the page's social preview image (needs Playwright).
+4. Commit the generated folder, `index.html` (its footer city links), `sitemap.xml`,
+   `tools/page-dates.json` and `assets/og/`.
+
+The build warns when a title or meta description is long enough to be cut off in search results.
 
 Shared parts (nav, logo strip, intro, services, process, footer, booking dialog) are copied from
 `index.html`, from the blocks marked `<!-- @shared:name -->`. After changing one of those on the home

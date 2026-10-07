@@ -156,7 +156,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 /* padding widens the mask box so glyph tops and the glow are not clipped */
 .marquee__base, .marquee__lit { grid-area: 1 / 1; padding: .14em .2em; margin: -.14em -.2em; }
-.marquee__base { color: var(--dim); }
+.marquee__base { color: var(--dim); font: inherit; }   /* h1 resets; the margin comes from the shared rule above */
 .marquee__lit {
   color: var(--limelight);
   text-shadow: 0 0 40px rgba(255, 225, 160, .25);
@@ -193,7 +193,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .crumbs a { color: var(--rose); text-decoration: none; border-bottom: 1px solid var(--velvet-line); }
 .crumbs a:hover { color: var(--limelight); }
 .crumbs [aria-current] { color: var(--limelight); }
-.marquee--city { font-size: clamp(3.5rem, min(14vw, 19vh), 12rem); }
+/* --chars is the longest line ("Rovaniemelle" = 12), so long city names still fit the screen width */
+.marquee.marquee--city { font-size: min(clamp(3.5rem, min(14vw, 19vh), 12rem), calc(88vw / (var(--chars) * .5))); }
 
 /* ---------- client logos ---------- */
 .logos { border-bottom: 1px solid var(--line); }
@@ -334,6 +335,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   font: 500 .7rem/1.2 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--brass);
 }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips a { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.chips a:hover { text-decoration-color: currentColor; }
 .chips li {
   padding: 4px 10px; border-radius: 999px;
   background: var(--gaffer-2); color: var(--ink);
@@ -575,7 +578,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .step::before, .step + .step::before, .step:nth-child(3)::before { left: -5px; top: 34px; }
   .bk__grid { grid-template-columns: 1fr; }
   .usecases { grid-template-columns: 1fr; }
-  .marquee--city { font-size: 17vw; }
   .bk { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; border-radius: 0; border: 0; }
   .booking__steps { flex-direction: column; }
   .logos__inner { grid-template-columns: 1fr; gap: 16px; padding-top: 22px; padding-bottom: 22px; }

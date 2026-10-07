@@ -1,0 +1,54 @@
+{
+  "juontaja-helsinki": {
+    "hash": "a921bc9f29579e6c",
+    "date": "2026-10-07"
+  },
+  "juontaja-espoo": {
+    "hash": "565ed1ee90c24951",
+    "date": "2026-10-07"
+  },
+  "juontaja-vantaa": {
+    "hash": "d673c7656dd3b67b",
+    "date": "2026-10-07"
+  },
+  "juontaja-tampere": {
+    "hash": "48980b1855c88301",
+    "date": "2026-10-07"
+  },
+  "juontaja-oulu": {
+    "hash": "6aaa2622ab4539e3",
+    "date": "2026-10-07"
+  },
+  "juontaja-turku": {
+    "hash": "4898dbf61fa303d6",
+    "date": "2026-10-07"
+  },
+  "juontaja-lahti": {
+    "hash": "285cc36b73c56ba2",
+    "date": "2026-10-07"
+  },
+  "juontaja-jyvaskyla": {
+    "hash": "7ed26e06200ea761",
+    "date": "2026-10-07"
+  },
+  "juontaja-seinajoki": {
+    "hash": "fb8775a683aabfab",
+    "date": "2026-10-07"
+  },
+  "juontaja-rovaniemi": {
+    "hash": "ad67ced9eb88efe6",
+    "date": "2026-10-07"
+  },
+  "juontaja-pori": {
+    "hash": "ed237fc703273c36",
+    "date": "2026-10-07"
+  },
+  "juontaja-vaasa": {
+    "hash": "82c8b252c4c4aa48",
+    "date": "2026-10-07"
+  },
+  "home": {
+    "hash": "d77fc32947e2eef5",
+    "date": "2026-10-07"
+  }
+}
