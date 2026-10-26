@@ -20,12 +20,12 @@ const card = (eyebrow, line1, line2, chars) => `<!doctype html>
 <html lang="fi"><head><meta charset="utf-8">
 <link rel="stylesheet" href="styles.css">
 <style>
-  body { margin: 0; background: var(--velvet); }
+  body { margin: 0; background: var(--stage); }
   .stage { min-height: 630px; height: 630px; padding: 48px; }
   .stage__light, .stage__floor { opacity: 1; transition: none; }
   .marquee { font-size: ${Math.min(190, Math.floor(1050 / (chars * 0.5)))}px; }
-  .marquee__base { color: var(--limelight); text-shadow: 0 0 40px rgba(255, 225, 160, .25); }
-  .og__site { position: absolute; left: 48px; bottom: 40px; font: 500 18px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--rose); }
+  .marquee__base { color: var(--stage-ink); text-shadow: 0 0 40px rgba(var(--glow), .45); }
+  .og__site { position: absolute; left: 48px; bottom: 40px; font: 500 18px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--stage-soft); }
 </style></head>
 <body>
   <section class="stage is-lit" style="--x: 50%; --y: 46%">
