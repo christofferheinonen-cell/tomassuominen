@@ -345,12 +345,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .logos__viewport:hover .logos__track { animation-play-state: paused; }
 .logos__track li { flex: none; padding: 0 clamp(24px, 3vw, 44px); }
-.logos__track img {
-  height: 36px; width: auto;
-  filter: grayscale(1); opacity: .55;
-  transition: opacity .3s var(--ease), filter .3s var(--ease);
-}
-.logos__track img:hover { opacity: 1; filter: none; }
+.logos__track li { display: flex; align-items: center; }
+/* height comes from each logo's height attribute (balanced per logo), width follows */
+.logos__track img { width: auto; opacity: .82; transition: opacity .3s var(--ease); }
+.logos__track img:hover { opacity: 1; }
 /* the track holds the list twice, so moving it by half loops seamlessly */
 @keyframes logos-scroll { to { transform: translateX(-50%); } }
 
@@ -892,6 +890,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .booking__steps { flex-direction: column; }
   .logos__inner { grid-template-columns: 1fr; gap: 16px; padding-top: 22px; padding-bottom: 22px; }
   .logos__label { max-width: none; }
+  .logos__track img { zoom: .8; }
   .stage__actions .btn { flex: 1 1 100%; }
   .footer__credit { margin-left: 0; width: 100%; }
   .consent__actions .btn { flex: 1 1 auto; }
