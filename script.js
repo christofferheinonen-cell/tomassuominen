@@ -181,7 +181,29 @@
     videoDialog.querySelector('[data-vid-close]').focus();
   };
 
+  // A self-hosted preview (data-video-preview) is the site's own file: it plays for every visitor,
+  // with no consent needed, and pauses while off screen.
+  const attachLocalPreview = (tile) => {
+    if (tile.querySelector('.video-tile__preview')) return;
+    const clip = document.createElement('video');
+    clip.className = 'video-tile__preview video-tile__preview--local';
+    Object.assign(clip, { muted: true, loop: true, playsInline: true, autoplay: true, preload: 'auto' });
+    clip.setAttribute('muted', '');
+    clip.setAttribute('playsinline', '');
+    clip.setAttribute('aria-hidden', 'true');
+    clip.tabIndex = -1;
+    ['webm', 'mp4'].forEach((ext) => {
+      const source = document.createElement('source');
+      source.src = `${tile.dataset.videoPreview}.${ext}`;
+      source.type = `video/${ext}`;
+      clip.appendChild(source);
+    });
+    clip.addEventListener('playing', () => clip.classList.add('is-ready'));
+    tile.insertBefore(clip, tile.querySelector('.video-tile__play'));
+  };
+
   const attachPreview = (tile) => {
+    if (tile.dataset.videoPreview) { attachLocalPreview(tile); return; }
     if (!videoPreviewsAllowed || reduceMotion || !tile.isConnected || tile.querySelector('.video-tile__preview')) return;
     const { video } = tile.dataset;
     const frame = document.createElement('iframe');
@@ -195,7 +217,11 @@
     tile.insertBefore(frame, tile.querySelector('.video-tile__play'));
   };
   const tileObserver = 'IntersectionObserver' in window
-    ? new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) attachPreview(e.target); }), { rootMargin: '200px' })
+    ? new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) attachPreview(e.target);
+      const clip = e.target.querySelector('video.video-tile__preview');
+      if (clip) { if (e.isIntersecting) clip.play().catch(() => {}); else clip.pause(); }
+    }), { rootMargin: '200px' })
     : null;
 
   const makeVideoTile = (tile) => {
@@ -241,7 +267,7 @@
       layer.appendChild(img);
       svcStage.appendChild(layer);
       if (media.dataset.video) {
-        ['video', 'videoTitle', 'videoW', 'videoH'].forEach((k) => { if (media.dataset[k]) layer.dataset[k] = media.dataset[k]; });
+        ['video', 'videoPreview', 'videoTitle', 'videoW', 'videoH'].forEach((k) => { if (media.dataset[k]) layer.dataset[k] = media.dataset[k]; });
         makeVideoTile(layer);
       }
       return layer;
@@ -526,14 +552,9 @@
   // Update the cookie section of the privacy policy (tools/legal.mjs) at the same time.
   //
   //   { id: 'analytics', name: 'Kävijätilastot', description: 'Kertoo, miten sivustoa käytetään.', load() { /* add the script tag */ } }
-  const OPTIONAL_SERVICES = [
-    {
-      id: 'youtube',
-      name: 'YouTube-videot',
-      description: 'Näyttää videoiden äänettömän esikatselun suoraan sivulla. Videot ladataan YouTubesta, joka on Googlen palvelu.',
-      load: enableVideoPreviews,
-    },
-  ];
+  // A YouTube preview without a self-hosted clip would need consent; to use one, add:
+  //   { id: 'youtube', name: 'YouTube-videot', description: 'Näyttää videoiden äänettömän esikatselun suoraan sivulla. Videot ladataan YouTubesta, joka on Googlen palvelu.', load: enableVideoPreviews }
+  const OPTIONAL_SERVICES = [];
   const CONSENT_KEY = 'ts-consent';
   const CONSENT_VERSION = 1;   // raise when the list of services changes, so visitors are asked again
 

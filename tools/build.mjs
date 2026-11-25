@@ -92,7 +92,7 @@ const shared = (name) => {
   // City pages live one folder down.
   // Pages built here live one folder down, so relative links gain "../".
   return m[1]
-    .replace(/(src|href)="(?!#|https?:|mailto:|tel:|\.\.\/|\/)([^"]+)"/g, '$1="../$2"')
+    .replace(/(src|href|data-video-preview)="(?!#|https?:|mailto:|tel:|\.\.\/|\/)([^"]+)"/g, '$1="../$2"')
     .replace('class="nav__brand" href="#top"', 'class="nav__brand" href="../"');
 };
 

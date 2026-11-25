@@ -42,15 +42,14 @@ other pages pick it up.
 
 ## Cookies and consent
 
-Fonts are self-hosted, and nothing loads from third parties until the visitor chooses it. The one
-optional service is YouTube (`OPTIONAL_SERVICES` in `script.js`), so the consent banner is shown on a
-first visit:
+Fonts and the video preview are self-hosted, and nothing loads from third parties on its own, so no
+consent banner is shown. YouTube loads only when a visitor presses a video's play button; the tile says
+so beforehand.
 
-- The muted video preview on the Muut service plays only after the visitor accepts YouTube.
-- Clicking a video's play button opens the full video in a popup either way; the tile says the video
-  plays from YouTube before it is clicked.
-
-To embed another video, add `data-video="<YouTube id>"` to a service's `<figure class="svc__media">`
-in `index.html` (with `data-video-w`/`-h` 9 and 16 for a vertical Short) and re-run `node tools/build.mjs`.
-To add analytics or an ad pixel, list it in `OPTIONAL_SERVICES`. Update the cookie section of the
-privacy policy (`tools/legal.mjs`) and `LEGAL_UPDATED` whenever these change.
+- Video tiles: a service `<figure class="svc__media">` with `data-video="<YouTube id>"` opens the full
+  video in a popup. `data-video-preview="assets/services/<name>"` points to a short muted loop
+  (`<name>.webm` + `<name>.mp4`, about 1 MB each) that plays in the tile; use a frame of it as the
+  figure's `<img>`. Re-run `node tools/build.mjs` after changes.
+- The consent manager in `script.js` shows a banner only while `OPTIONAL_SERVICES` is not empty
+  (e.g. analytics, an ad pixel, or a YouTube preview without a self-hosted clip). Update the cookie
+  section of the privacy policy (`tools/legal.mjs`) and `LEGAL_UPDATED` whenever these change.
