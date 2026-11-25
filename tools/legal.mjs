@@ -65,14 +65,16 @@ export const legalPages = [
         <li><strong>Sivuston palvelinpalvelun tarjoaja</strong> ylläpitää sivustoa ja sen lokitietoja.</li>
         <li>Mahdollinen <strong>kirjanpito- tai laskutuspalvelu</strong> käsittelee laskutukseen tarvittavia tietoja.</li>
       </ul>
+      <p><strong>YouTube</strong> (Google) toimittaa sivustolle upotetut videot. Google on näissä tilanteissa itsenäinen rekisterinpitäjä, ja sen käsittelyyn sovelletaan Googlen tietosuojakäytäntöä. Ks. kohta 7.</p>
       <p>Viranomaisille tietoja luovutetaan vain lain velvoittamana.</p>
 
       <h2>6. Tietojen siirrot EU:n ja ETA:n ulkopuolelle</h2>
-      <p>FormSubmit ja Microsoft voivat käsitellä tietoja myös EU:n ja ETA:n ulkopuolella, esimerkiksi Yhdysvalloissa. Microsoft on sitoutunut EU:n ja Yhdysvaltojen väliseen tietosuojakehykseen (EU–US Data Privacy Framework), johon siirrot voivat perustua. Muissa tapauksissa siirrot perustuvat Euroopan komission hyväksymiin vakiosopimuslausekkeisiin tai muuhun tietosuoja-asetuksen mukaiseen siirtoperusteeseen.</p>
+      <p>FormSubmit, Microsoft ja Google (YouTube) voivat käsitellä tietoja myös EU:n ja ETA:n ulkopuolella, esimerkiksi Yhdysvalloissa. Microsoft ja Google ovat sitoutuneet EU:n ja Yhdysvaltojen väliseen tietosuojakehykseen (EU–US Data Privacy Framework), johon siirrot voivat perustua. Muissa tapauksissa siirrot perustuvat Euroopan komission hyväksymiin vakiosopimuslausekkeisiin tai muuhun tietosuoja-asetuksen mukaiseen siirtoperusteeseen.</p>
 
       <h2>7. Evästeet ja seuranta</h2>
-      <p>Sivusto ei käytä evästeitä, kävijäseurantaa eikä mainosseurantaa, eikä se tallenna selaimeesi tietoja. Fontit ladataan omalta palvelimeltamme, joten sivujen avaaminen ei välitä IP-osoitettasi kolmansille osapuolille. Tiedustelulomake lähettää tiedot FormSubmit-palveluun vasta, kun painat lähetä-painiketta.</p>
-      <p>Jos otamme myöhemmin käyttöön evästeitä tai seurantaa, joka ei ole sivuston toiminnan kannalta välttämätöntä, pyydämme siihen ensin suostumuksesi ja päivitämme tämän selosteen.</p>
+      <p>Sivusto ei käytä kävijäseurantaa eikä mainosseurantaa. Fontit ladataan omalta palvelimeltamme, joten sivujen avaaminen ei sellaisenaan välitä IP-osoitettasi kolmansille osapuolille. Tiedustelulomake lähettää tiedot FormSubmit-palveluun vasta, kun painat lähetä-painiketta.</p>
+      <p><strong>YouTube-videot.</strong> Sivustolla on YouTubeen upotettuja videoita, jotka ladataan YouTuben yksityisyyttä parantavasta osoitteesta (youtube-nocookie.com). Videon esikatselu toistuu sivulla vain, jos hyväksyt YouTube-videot evästeasetuksissa. Jos painat videon toistopainiketta, video avautuu ja ladataan YouTubesta myös ilman tätä hyväksyntää. Kun YouTube-soitin latautuu, selaimesi on yhteydessä Googlen palvelimiin, jolloin Google saa esimerkiksi IP-osoitteesi ja voi tallentaa tietoja selaimeesi.</p>
+      <p>Valintasi tallennetaan selaimesi paikalliseen muistiin (localStorage), jotta sitä ei kysytä joka sivulla. Voit muuttaa valintaa milloin tahansa sivun alalaidan Evästeasetukset-linkistä.</p>
 
       <h2>8. Tietoturva</h2>
       <p>Tiedustelulomakkeen tiedot välitetään salattua yhteyttä käyttäen. Sähköposti ja muut järjestelmät on suojattu käyttäjätunnuksin ja salasanoin, ja tietoihin pääsevät vain ne, jotka tarvitsevat niitä työssään.</p>

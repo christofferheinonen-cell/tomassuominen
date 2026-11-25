@@ -45,7 +45,7 @@
       "name": "Juontaja ja puhuja Helsinki | Tomas Suominen",
       "description": "Tapahtumajuontaja ja keynote-puhuja Helsinkiin. Tomas Suominen juontaa yritystapahtumat, gaalat ja seminaarit sekä isännöi VIP-tilaisuudet.",
       "inLanguage": "fi",
-      "dateModified": "2026-10-26",
+      "dateModified": "2026-11-25",
       "about": {
         "@id": "https://www.tomassuominen.fi/#tomas"
       },
@@ -337,7 +337,10 @@
     <!-- Services: not a sequence, so no numbering. Each row's button preselects the service in the form.
          On wide screens script.js copies the images into a sticky panel that crossfades as the services
          scroll past; on phones each image sits in its own card. The images are placeholder illustrations:
-         swap in photos (assets/services/*.jpg, 4:5) and give them real alt text. -->
+         swap in photos (assets/services/*.jpg, 4:5) and give them real alt text.
+         A figure with data-video="<YouTube id>" becomes a video tile: a muted preview (only after the
+         visitor accepts YouTube in the consent banner) and the full video in a popup on click.
+         data-video-w/-h is the video's shape: 16/9 for a normal video, 9/16 for a Short. -->
     <section class="services" id="palvelut" aria-labelledby="palvelut-otsikko">
       <div class="wrap">
         <header class="section-head">
@@ -385,7 +388,7 @@
           </li>
 
           <li class="svc">
-            <figure class="svc__media"><img src="../assets/services/muut.svg" alt="" width="800" height="1000" loading="lazy"></figure>
+            <figure class="svc__media" data-video="2WH67kjTGXM" data-video-title="Tomas Suominen kameran edessä" data-video-w="16" data-video-h="9"><img src="../assets/services/muut.svg" alt="" width="800" height="1000" loading="lazy"></figure>
             <h3 class="svc__name">Muut</h3>
             <div class="svc__body">
               <p>Kaikki, mikä ei mene siistiin lokeroon: some-sisällöt, tuotelanseeraukset, brändi-hostaus ja konseptien elävöittäminen lavalla ja kameran edessä.</p>
@@ -393,7 +396,7 @@
             <a class="svc__cta" href="#varaa" data-book data-service="Muu">Kerro ideasi <span aria-hidden="true">→</span></a>
           </li>
         </ul>
-        <div class="svc-stage" aria-hidden="true" data-svc-stage></div>
+        <div class="svc-stage" data-svc-stage></div>
         </div>
       </div>
     </section>

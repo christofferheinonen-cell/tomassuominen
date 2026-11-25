@@ -133,6 +133,98 @@
     items.forEach((el) => { el.classList.add('reveal'); io.observe(el); });
   }
 
+  /* ---------- Video tiles: muted preview, full video in a popup ---------- */
+  // An element with data-video="<YouTube id>" becomes a tile with a play button. Clicking opens
+  // the full video (with sound) in a popup. The silent looping preview loads only after the
+  // visitor accepts YouTube in the consent banner (an embedded player contacts Google), and only
+  // while the tile is on screen, so hidden copies never load a player.
+  const YT_EMBED = 'https://www.youtube-nocookie.com/embed/';
+  const ytParams = 'playsinline=1&rel=0&modestbranding=1&iv_load_policy=3';
+  const videoTiles = [];
+  let videoPreviewsAllowed = false;
+  let videoDialog = null;
+
+  const openVideo = (tile, opener) => {
+    if (!videoDialog) {
+      videoDialog = document.createElement('dialog');
+      videoDialog.className = 'vid';
+      videoDialog.innerHTML = `
+        <div class="vid__frame" data-vid-frame></div>
+        <div class="vid__bar">
+          <p class="vid__note">Video toistetaan YouTubesta.</p>
+          <button class="vid__close" type="button" data-vid-close aria-label="Sulje video">
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+        </div>`;
+      document.body.appendChild(videoDialog);
+      videoDialog.querySelector('[data-vid-close]').addEventListener('click', () => videoDialog.close());
+      videoDialog.addEventListener('click', (e) => { if (e.target === videoDialog) videoDialog.close(); });
+      videoDialog.addEventListener('close', () => {
+        videoDialog.querySelector('[data-vid-frame]').replaceChildren();   // stops playback
+        document.documentElement.classList.remove('has-dialog');
+        videoDialog.opener?.focus();
+      });
+    }
+    const { video, videoTitle, videoW = '16', videoH = '9' } = tile.dataset;
+    videoDialog.style.setProperty('--arw', videoW);
+    videoDialog.style.setProperty('--arh', videoH);
+    videoDialog.setAttribute('aria-label', videoTitle || 'Video');
+    const frame = document.createElement('iframe');
+    frame.src = `${YT_EMBED}${video}?autoplay=1&${ytParams}`;
+    frame.title = videoTitle || 'Video';
+    frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    frame.allowFullscreen = true;
+    videoDialog.querySelector('[data-vid-frame]').replaceChildren(frame);
+    videoDialog.opener = opener;
+    videoDialog.showModal();
+    document.documentElement.classList.add('has-dialog');
+    videoDialog.querySelector('[data-vid-close]').focus();
+  };
+
+  const attachPreview = (tile) => {
+    if (!videoPreviewsAllowed || reduceMotion || !tile.isConnected || tile.querySelector('.video-tile__preview')) return;
+    const { video } = tile.dataset;
+    const frame = document.createElement('iframe');
+    frame.className = 'video-tile__preview';
+    frame.src = `${YT_EMBED}${video}?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&disablekb=1&${ytParams}`;
+    frame.title = '';
+    frame.tabIndex = -1;
+    frame.setAttribute('aria-hidden', 'true');
+    frame.allow = 'autoplay; encrypted-media';
+    frame.addEventListener('load', () => frame.classList.add('is-ready'));
+    tile.insertBefore(frame, tile.querySelector('.video-tile__play'));
+  };
+  const tileObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) attachPreview(e.target); }), { rootMargin: '200px' })
+    : null;
+
+  const makeVideoTile = (tile) => {
+    const { videoTitle, videoW = '16', videoH = '9' } = tile.dataset;
+    tile.classList.add('video-tile');
+    tile.style.setProperty('--arw', videoW);
+    tile.style.setProperty('--arh', videoH);
+    const play = document.createElement('button');
+    play.type = 'button';
+    play.className = 'video-tile__play';
+    play.setAttribute('aria-label', `Katso video: ${videoTitle || 'video'}. Avautuu ponnahdusikkunaan, toisto YouTubesta.`);
+    play.innerHTML = `
+      <span class="video-tile__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M6 3.5v15l12.5-7.5z" fill="currentColor"/></svg></span>
+      <span class="video-tile__label" aria-hidden="true">Katso video<small>Toisto YouTubesta</small></span>`;
+    play.addEventListener('click', () => openVideo(tile, play));
+    tile.appendChild(play);
+    videoTiles.push(tile);
+    tileObserver?.observe(tile);
+  };
+  // Called by the consent manager when the visitor accepts YouTube.
+  const enableVideoPreviews = () => {
+    videoPreviewsAllowed = true;
+    videoTiles.forEach((tile) => {
+      const r = tile.getBoundingClientRect();
+      if (r.width && r.bottom > -200 && r.top < window.innerHeight + 200) attachPreview(tile);
+    });
+  };
+  document.querySelectorAll('.svc__media[data-video]').forEach(makeVideoTile);
+
   /* ---------- Services: sticky image that follows the scroll ---------- */
   // Copies each service's image into one sticky panel and crossfades to the service
   // that is crossing the middle of the screen. CSS shows the panel only on wide screens.
@@ -141,14 +233,22 @@
     const section = svcStage.closest('.services');
     const items = [...section.querySelectorAll('.svc')];
     const images = items.map((item) => {
-      const img = item.querySelector('.svc__media img').cloneNode();
-      img.className = 'svc-stage__img';
+      const media = item.querySelector('.svc__media');
+      const layer = document.createElement('div');
+      layer.className = 'svc-stage__img';
+      const img = media.querySelector('img').cloneNode();
       img.loading = 'eager';
-      svcStage.appendChild(img);
-      return img;
+      layer.appendChild(img);
+      svcStage.appendChild(layer);
+      if (media.dataset.video) {
+        ['video', 'videoTitle', 'videoW', 'videoH'].forEach((k) => { if (media.dataset[k]) layer.dataset[k] = media.dataset[k]; });
+        makeVideoTile(layer);
+      }
+      return layer;
     });
     const caption = document.createElement('p');
     caption.className = 'svc-stage__caption';
+    caption.setAttribute('aria-hidden', 'true');
     svcStage.appendChild(caption);
 
     let active = -1;
@@ -156,7 +256,10 @@
       if (i === active) return;
       active = i;
       items.forEach((item, n) => item.classList.toggle('is-active', n === i));
-      images.forEach((img, n) => img.classList.toggle('is-active', n === i));
+      images.forEach((layer, n) => {
+        layer.classList.toggle('is-active', n === i);
+        layer.inert = n !== i;   // hidden layers' play buttons can't be clicked or tabbed to
+      });
       caption.textContent = items[i].querySelector('.svc__name').textContent;
     };
 
@@ -417,13 +520,20 @@
   }
 
   /* ---------- Cookie consent ---------- */
-  // The site sets no cookies and loads no tracking, so no banner is needed and none is shown.
-  // To add analytics or an ad pixel, list it here. The banner then appears, and the service
-  // loads only after the visitor accepts it; "Vain välttämättömät" is as easy as accepting.
+  // Optional third-party services. The banner appears while this list is not empty, and each
+  // service loads only after the visitor accepts it; "Vain välttämättömät" is as easy as accepting.
+  // To add analytics or an ad pixel, list it here.
   // Update the cookie section of the privacy policy (tools/legal.mjs) at the same time.
   //
   //   { id: 'analytics', name: 'Kävijätilastot', description: 'Kertoo, miten sivustoa käytetään.', load() { /* add the script tag */ } }
-  const OPTIONAL_SERVICES = [];
+  const OPTIONAL_SERVICES = [
+    {
+      id: 'youtube',
+      name: 'YouTube-videot',
+      description: 'Näyttää videoiden äänettömän esikatselun suoraan sivulla. Videot ladataan YouTubesta, joka on Googlen palvelu.',
+      load: enableVideoPreviews,
+    },
+  ];
   const CONSENT_KEY = 'ts-consent';
   const CONSENT_VERSION = 1;   // raise when the list of services changes, so visitors are asked again
 
@@ -453,7 +563,7 @@
     banner.innerHTML = `
       <div class="consent__inner">
         <p class="consent__title">Evästeet</p>
-        <p class="consent__text">Käytämme valinnaisia evästeitä vain suostumuksellasi: ${OPTIONAL_SERVICES.map((sv) => sv.name.toLowerCase()).join(', ')}. Sivusto toimii myös ilman niitä. <a href="${policyHref}">Tietosuojaseloste</a></p>
+        <p class="consent__text">Käytämme valinnaisia evästeitä vain suostumuksellasi: ${OPTIONAL_SERVICES.map((sv) => sv.name).join(', ')}. Sivusto toimii myös ilman niitä. <a href="${policyHref}">Tietosuojaseloste</a></p>
         <div class="consent__choices" hidden>
           <label class="consent__choice"><input type="checkbox" checked disabled><span><strong>Välttämättömät</strong> Sivuston toiminta ja tämä valinta. Aina päällä.</span></label>
           ${OPTIONAL_SERVICES.map((sv) => `<label class="consent__choice"><input type="checkbox" data-service-id="${sv.id}"><span><strong>${sv.name}</strong> ${sv.description}</span></label>`).join('')}

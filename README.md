@@ -42,8 +42,15 @@ other pages pick it up.
 
 ## Cookies and consent
 
-The site sets no cookies, stores nothing in the browser and loads nothing from third parties (fonts
-are self-hosted in `assets/fonts/`), so no cookie banner is shown. To add analytics or an ad pixel,
-list it in `OPTIONAL_SERVICES` in `script.js`: the consent banner and the footer's "Evästeasetukset"
-link then appear, and the service loads only after the visitor accepts it. Update the cookie section
-of the privacy policy at the same time.
+Fonts are self-hosted, and nothing loads from third parties until the visitor chooses it. The one
+optional service is YouTube (`OPTIONAL_SERVICES` in `script.js`), so the consent banner is shown on a
+first visit:
+
+- The muted video preview on the Muut service plays only after the visitor accepts YouTube.
+- Clicking a video's play button opens the full video in a popup either way; the tile says the video
+  plays from YouTube before it is clicked.
+
+To embed another video, add `data-video="<YouTube id>"` to a service's `<figure class="svc__media">`
+in `index.html` (with `data-video-w`/`-h` 9 and 16 for a vertical Short) and re-run `node tools/build.mjs`.
+To add analytics or an ad pixel, list it in `OPTIONAL_SERVICES`. Update the cookie section of the
+privacy policy (`tools/legal.mjs`) and `LEGAL_UPDATED` whenever these change.

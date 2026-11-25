@@ -15,4 +15,4 @@ export const COMPANY = {
 };
 
 // Date shown as "Päivitetty" on the legal pages. Change it whenever their content changes.
-export const LEGAL_UPDATED = '7.10.2026';
+export const LEGAL_UPDATED = '25.11.2026';
