@@ -904,8 +904,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .reveal { opacity: 1; transform: none; }
   .bk[open], .bk::backdrop, .vid[open], .vid::backdrop { animation: none; }
   .hl { background-size: 100% 100%; }
-  .logos__track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; row-gap: 20px; }
-  .logos__track [aria-hidden] { display: none; }
+  /* the logo strip keeps scrolling even with Reduce Motion on (a deliberate choice); the rule above
+     would otherwise shorten its 40s loop to nothing and make it flicker */
+  .logos__track { animation-duration: 40s !important; }
   .voice__wave span { animation: none; transform: scaleY(.8); }
   .voice__dot { animation: none; }
   .svc-stage__img, .svc-stage__img.is-active { transform: none; }
